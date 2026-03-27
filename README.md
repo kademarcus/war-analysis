@@ -15,8 +15,10 @@ Correlates of War's Composite Index of National Capability, and Michael Horowitz
 
 ## Analaysis
 - For the power analysis, I argued that the Balance of Power theory applies, and compared the power levels of the countries involved in the Arab Israeli War of 1948
+- Israel is not coded as a state until 1948 (exactly when the war starts), so I ran a linear regression to see if Israels power was able to be predicted based on future data (which it was) 
 - For the leader analysis, I replicated Horowitz and Stam's logistic regression, and outputted predicted probabilites of initation and compared it to the average probability of leaders to initiate.
-
+- Figures can be found in both the report and the "figures" folder within the "Report folder
+  
 ## Conclusions
 - This war did fit the profile of the Balance of Power theory of War, as Israel had a large increase in power that outpaced the other nations at war with it
 - This war also supproted Horowitz and Stam's logistic regression analysis, as the probabilites of leader initation were either at the average probability or higher. 
