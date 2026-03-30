@@ -10,27 +10,27 @@ library(gt)
 library(haven)
 
 #Data Reading
-War_Data <- read_dta("stata_data.dta")
-War_Data <- War_Data %>%
+leader_data <- read_dta("stata_data.dta")
+leader_data <- leader_data %>%
   mutate(cinc = if_else(cinc < 0, 0, cinc))
-print(mean(War_Data$cinc,na.rm = TRUE))
+print(mean(leader_data$cinc,na.rm = TRUE))
 
 #predictive model
 initiation_logit <- glm(initiation ~ age + milnoncombat + combat + rebel + warwin +
                           warloss + rebelwin + rebelloss + aut + cinc + tau_lead +
                           officetenure1000 + fiveyearchallengelag,
                         family = "binomial", 
-                        data = War_Data) 
+                        data = leader_data) 
 
 summary(initiation_logit)
 
 #predicted probabilities
-War_Data <- na.omit(War_Data)
+leader_data <- na.omit(War_Data)
 predicted_probabilities <- predict(initiation_logit, type = "response", na.action = na.exclude())
-War_Data$predicted_probabilities <- predicted_probabilities
+leader_data$predicted_probabilities <- predicted_probabilities
 
-#Israel and Egypt Leaders only
-War_Data <- War_Data %>%
+#Israel and Arab Leaders only
+leader_data <- leader_data%>%
   filter(ccode == 666|
            ccode == 651|
            ccode == 663|
@@ -38,10 +38,10 @@ War_Data <- War_Data %>%
            ccode == 660|
            ccode == 652) %>%
   filter(year == 1948)
-View(War_Data)
+View(leader_data)
 
 #export clean data
-write_csv(War_Data, file = "War_Data.csv")
+write_csv(leader_data, file = "leader_data.csv")
 
 #table for probabilities
 leader_predictions <- War_Data %>%
